@@ -1,0 +1,14 @@
+{
+  "name": "psykiwi",
+  "private": true,
+  "description": "Share your personality with a single link",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
+
