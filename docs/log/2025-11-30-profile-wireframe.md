@@ -2,7 +2,7 @@
 
 ## Overview
 
-GitHub profile style design for Psykiwi. Users can pin activities to the top, have a README, and get AI-generated summaries. Single column layout for consistency across devices.
+GitHub profile style design for Psykiwi. Users can pin activities to the top, add a tagline, and get AI-generated summaries. Single column layout for consistency across devices.
 
 ---
 
@@ -36,17 +36,6 @@ GitHub profile style design for Psykiwi. Users can pin activities to the top, ha
 │   enthusiasm to everything they do..."                      │
 │                                                             │
 │                              [🔄 Regenerate]                │
-└─────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────┐
-│  📝 README                                     [Edit]       │
-│─────────────────────────────────────────────────────────────│
-│                                                             │
-│  ### Hi there 👋                                            │
-│                                                             │
-│  I'm a product designer who loves exploring how people     │
-│  think and interact. Feel free to reach out!               │
-│                                                             │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -286,16 +275,14 @@ Profile
 ├── User Info
 │   ├── profile_photo
 │   ├── username
-│   ├── bio
+│   ├── tagline (optional)
 │   ├── location (optional)
 │   └── links[] (optional)
 │
 ├── AI Summary
 │   ├── generated_text
 │   ├── generated_at
-│   └── sources: [activities, readme]
-│
-├── README (Markdown, free-form)
+│   └── sources: [activities]
 │
 ├── Activities[]
 │   ├── id
@@ -335,8 +322,8 @@ Profile
 | **Single Column**    | One column layout for all screen sizes      |
 | **Pinned**           | Max 6, shown at top of Activities section   |
 | **Multiple Results** | Same test taken multiple times, pin one     |
-| **README**           | Markdown, free-form like GitHub profile     |
-| **AI Summary**       | Auto-generated from activities + README     |
+| **Tagline**          | Short one-liner in profile header           |
+| **AI Summary**       | Auto-generated from activities              |
 | **Activity Graph**   | GitHub contribution graph style             |
 | **Activities**       | Single section: Pinned at top, then by date |
 | **CTA Drawer**       | Slide-up drawer at scroll end               |
@@ -350,7 +337,7 @@ Profile
 - **Single column layout** for consistency across mobile/desktop
 - Pinned max 6, shown at top within Activities section
 - AI summary is optional, user can regenerate
-- README supports markdown
+- Tagline is a short one-liner in profile header
 - Activity Graph and Activities are separate sections
 - CTA via drawer instead of footer
 - No social interactions (likes/comments) in MVP

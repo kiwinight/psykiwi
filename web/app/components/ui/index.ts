@@ -67,3 +67,5 @@ export * from "../shadcn-ui/textarea";
 export * from "../shadcn-ui/toggle";
 export * from "../shadcn-ui/toggle-group";
 export * from "../shadcn-ui/tooltip";
+export * from "./kiwi-logo";
+export * from "./typography";
