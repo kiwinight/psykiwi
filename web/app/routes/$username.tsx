@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useIsMobile } from "~/hooks/use-mobile";
 import {
   BarChart3,
   Brain,
@@ -24,34 +22,15 @@ import {
   Blockquote,
   Button,
   Card,
-  CardAction,
   CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerFooter,
-  H3,
   KiwiLogo,
   Large,
   Muted,
   Separator,
-  Small,
   H4,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  CardDescription,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -66,28 +45,6 @@ export function meta({ params }: Route.MetaArgs) {
 }
 
 export default function ProfilePage({ params }: Route.ComponentProps) {
-  const [ctaOpen, setCtaOpen] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (hasTriggered) return;
-
-      const scrollPercent =
-        window.scrollY /
-        (document.documentElement.scrollHeight - window.innerHeight);
-
-      if (scrollPercent >= 0.5) {
-        setCtaOpen(true);
-        setHasTriggered(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasTriggered]);
-
   return (
     <div className="min-h-screen bg-[oklch(0.98_0_0)]">
       {/* Header */}
@@ -100,11 +57,12 @@ export default function ProfilePage({ params }: Route.ComponentProps) {
         </div>
       </header>
 
-      <main className="container mx-auto sm:max-w-2xl space-y-8 px-4 sm:px-0 py-8">
-        {/* Profile Info */}
+      <main className="container mx-auto sm:max-w-2xl px-4 sm:px-0 py-8">
+        {/* Unified Profile Card */}
         <Card className="shadow-none">
-          <CardContent>
-            <div className="flex-1 space-y-3">
+          <CardContent className="space-y-6">
+            {/* Profile Info Section */}
+            <div className="space-y-3">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <H4>Alex Kwon</H4>
@@ -118,10 +76,10 @@ export default function ProfilePage({ params }: Route.ComponentProps) {
                   <AvatarFallback className="text-2xl">AK</AvatarFallback>
                 </Avatar>
               </div>
-              <Muted>
+              <div className="text-sm">
                 I'm a product designer who loves exploring how people think and
                 interact. Feel free to reach out!
-              </Muted>
+              </div>
               <div className="flex flex-col gap-1 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
@@ -160,363 +118,215 @@ export default function ProfilePage({ params }: Route.ComponentProps) {
                 </DropdownMenu>
               </div>
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Summary */}
-        <Card className="shadow-none">
-          <CardHeader className="gap-y-0">
-            <CardTitle className="text-lg leading-8">
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4" />
-                Summary
-              </div>
-            </CardTitle>
+            <Separator className="-mx-6 !w-[calc(100%+3rem)]" />
 
-            {/* <CardDescription>
-              AI generated summary based on your activities
-            </CardDescription> */}
-            <CardAction>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon-sm">
-                    <RefreshCw className="" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  Regenerate summary using AI based on your activities
-                </TooltipContent>
-              </Tooltip>
-            </CardAction>
-          </CardHeader>
-          <CardContent>
-            <Blockquote className="mt-0 text-muted-foreground">
-              "Alex is an energetic and curious person who thrives on new
-              experiences. As an ENFP 7w8, they bring enthusiasm to everything
-              they do. Their secure attachment style and high openness suggest
-              someone who builds meaningful connections while constantly
-              exploring new ideas."
-            </Blockquote>
-          </CardContent>
-        </Card>
-
-        {/* Activity Graph */}
-        <Card className="shadow-none">
-          <CardHeader className="gap-y-0">
-            <CardTitle className="text-lg leading-8">
-              <div className="flex items-center gap-2">
-                <BarChart3 className="h-4 w-4" />
-                Activity Graph
+            {/* Summary Section */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Large className="flex items-center gap-2 font-semibold">
+                  <Sparkles className="h-4 w-4" />
+                  Summary
+                </Large>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" size="icon-sm">
+                      <RefreshCw className="h-4 w-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Regenerate summary using AI based on your activities
+                  </TooltipContent>
+                </Tooltip>
               </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="w-20 text-sm text-muted-foreground">
-                Nov 2025
-              </span>
-              <div className="flex-1 h-4 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary/70 rounded-full"
-                  style={{ width: "50%" }}
-                />
-              </div>
-              <span className="w-6 text-sm text-muted-foreground text-right">
-                5
-              </span>
+              <Blockquote className="text-sm">
+                "Alex is an energetic and curious person who thrives on new
+                experiences. As an ENFP 7w8, they bring enthusiasm to everything
+                they do. Their secure attachment style and high openness suggest
+                someone who builds meaningful connections while constantly
+                exploring new ideas."
+              </Blockquote>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="w-20 text-sm text-muted-foreground">
-                Oct 2025
-              </span>
-              <div className="flex-1 h-4 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary/70 rounded-full"
-                  style={{ width: "80%" }}
-                />
-              </div>
-              <span className="w-6 text-sm text-muted-foreground text-right">
-                8
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="w-20 text-sm text-muted-foreground">
-                Sep 2025
-              </span>
-              <div className="flex-1 h-4 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary/70 rounded-full"
-                  style={{ width: "30%" }}
-                />
-              </div>
-              <span className="w-6 text-sm text-muted-foreground text-right">
-                3
-              </span>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Activities */}
-        <Card className="shadow-none">
-          <CardHeader className="gap-y-0">
-            <CardTitle className="text-lg leading-8 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <ListChecks className="h-4 w-4" />
-                Activities
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Pinned Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Separator className="flex-1" />
-                <span>Pinned</span>
-                <Separator className="flex-1" />
-              </div>
+            <Separator className="-mx-6 !w-[calc(100%+3rem)]" />
 
-              {/* MBTI Card */}
-              <Card className="shadow-none">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+            {/* Pinned Activities Section */}
+            <div className="space-y-0">
+              <Large className="flex items-center gap-2 font-semibold">
+                <Pin className="h-4 w-4" />
+                Pinned activities
+              </Large>
+
+              <div className="space-y-0">
+                {/* MBTI */}
+                <div className="space-y-2 py-6">
+                  <div className="flex items-center gap-2 font-semibold">
                     <Brain className="h-4 w-4" />
                     MBTI
-                  </CardTitle>
-                  <CardAction>
-                    <Pin className="h-4 w-4 text-primary" />
-                  </CardAction>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Large>ENFP "The Campaigner"</Large>
+                  </div>
+                  <div className="font-semibold">ENFP "The Campaigner"</div>
                   <Muted>Energetic and creative free spirit...</Muted>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <a
-                    href="https://16personalities.com"
-                    className="flex items-center gap-1 text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    16personalities.com
-                  </a>
-                  <Muted>Nov 29</Muted>
-                </CardFooter>
-              </Card>
+                  <div className="flex items-center justify-between pt-2">
+                    <a
+                      href="https://16personalities.com"
+                      className="flex items-center gap-1 text-sm text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      16personalities.com
+                    </a>
+                    <Muted>Nov 29</Muted>
+                  </div>
+                </div>
 
-              {/* Enneagram Card */}
-              <Card className="shadow-none">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                <Separator />
+
+                {/* Enneagram */}
+                <div className="space-y-2 py-6">
+                  <div className="flex items-center gap-2 font-semibold">
                     <Hash className="h-4 w-4" />
                     Enneagram
-                  </CardTitle>
-                  <CardAction>
-                    <Pin className="h-4 w-4 text-primary" />
-                  </CardAction>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Large>Type 7w8 "The Enthusiast"</Large>
+                  </div>
+                  <div className="font-semibold">Type 7w8 "The Enthusiast"</div>
                   <Muted>Optimistic and versatile personality...</Muted>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <a
-                    href="https://truity.com"
-                    className="flex items-center gap-1 text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    truity.com
-                  </a>
-                  <Muted>Oct 20</Muted>
-                </CardFooter>
-              </Card>
+                  <div className="flex items-center justify-between pt-2">
+                    <a
+                      href="https://truity.com"
+                      className="flex items-center gap-1 text-sm text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      truity.com
+                    </a>
+                    <Muted>Oct 20</Muted>
+                  </div>
+                </div>
 
-              {/* Love Language Card */}
-              <Card className="shadow-none">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                <Separator />
+
+                {/* Love Language */}
+                <div className="space-y-2 py-6">
+                  <div className="flex items-center gap-2 font-semibold">
                     <Heart className="h-4 w-4" />
                     Love Language
-                  </CardTitle>
-                  <CardAction>
-                    <Pin className="h-4 w-4 text-primary" />
-                  </CardAction>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Large>1. Quality Time (35%)</Large>
+                  </div>
+                  <div className="font-semibold">1. Quality Time (35%)</div>
                   <Muted>Values shared time and undivided attention...</Muted>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <a
-                    href="https://5lovelanguages.com"
-                    className="flex items-center gap-1 text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    5lovelanguages.com
-                  </a>
-                  <Muted>Nov 28</Muted>
-                </CardFooter>
-              </Card>
+                  <div className="flex items-center justify-between pt-2">
+                    <a
+                      href="https://5lovelanguages.com"
+                      className="flex items-center gap-1 text-sm text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      5lovelanguages.com
+                    </a>
+                    <Muted>Nov 28</Muted>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Nov 2025 Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Separator className="flex-1" />
-                <span>Nov 2025</span>
-                <Separator className="flex-1" />
-              </div>
+            <Separator className="-mx-6 !w-[calc(100%+3rem)]" />
 
-              {/* Big Five Card */}
-              <Card className="shadow-none">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+            {/* Activities Section */}
+            <div className="space-y-0">
+              <Large className="flex items-center gap-2 font-semibold">
+                <ListChecks className="h-4 w-4" />
+                Activities
+              </Large>
+
+              <div className="space-y-0">
+                {/* Big Five */}
+                <div className="space-y-2 py-6">
+                  <div className="flex items-center gap-2 font-semibold">
                     <Dna className="h-4 w-4" />
                     Big Five
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Large>O 78% · C 62% · E 71% · A 45% · N 38%</Large>
+                  </div>
+                  <div className="font-semibold">
+                    O 78% · C 62% · E 71% · A 45% · N 38%
+                  </div>
                   <Muted>
                     Analysis of the five major personality factors...
                   </Muted>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <a
-                    href="https://understandmyself.com"
-                    className="flex items-center gap-1 text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    understandmyself.com
-                  </a>
-                  <Muted>Nov 25</Muted>
-                </CardFooter>
-              </Card>
+                  <div className="flex items-center justify-between pt-2">
+                    <a
+                      href="https://understandmyself.com"
+                      className="flex items-center gap-1 text-sm text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      understandmyself.com
+                    </a>
+                    <Muted>Nov 25</Muted>
+                  </div>
+                </div>
 
-              {/* DISC Card */}
-              <Card className="shadow-none">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                <Separator />
+
+                {/* DISC */}
+                <div className="space-y-2 py-6">
+                  <div className="flex items-center gap-2 font-semibold">
                     <Briefcase className="h-4 w-4" />
                     DISC
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Large>Di - Dominant/Influential</Large>
+                  </div>
+                  <div className="font-semibold">Di - Dominant/Influential</div>
                   <Muted>
                     Assertive and influential communication style...
                   </Muted>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <a
-                    href="https://crystalknows.com"
-                    className="flex items-center gap-1 text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    crystalknows.com
-                  </a>
-                  <Muted>Nov 20</Muted>
-                </CardFooter>
-              </Card>
-            </div>
+                  <div className="flex items-center justify-between pt-2">
+                    <a
+                      href="https://crystalknows.com"
+                      className="flex items-center gap-1 text-sm text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      crystalknows.com
+                    </a>
+                    <Muted>Nov 20</Muted>
+                  </div>
+                </div>
 
-            {/* Oct 2025 Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Separator className="flex-1" />
-                <span>Oct 2025</span>
-                <Separator className="flex-1" />
-              </div>
+                <Separator />
 
-              {/* Attachment Style Card */}
-              <Card className="shadow-none">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                {/* Attachment Style */}
+                <div className="space-y-2 py-6">
+                  <div className="flex items-center gap-2 font-semibold">
                     <Link2 className="h-4 w-4" />
                     Attachment Style
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Large>Secure</Large>
+                  </div>
+                  <div className="font-semibold">Secure</div>
                   <Muted>Comfortable with intimacy, trusts others...</Muted>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <a
-                    href="https://attachmentproject.com"
-                    className="flex items-center gap-1 text-sm text-primary hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <LinkIcon className="h-4 w-4" />
-                    attachmentproject.com
-                  </a>
-                  <Muted>Oct 15</Muted>
-                </CardFooter>
-              </Card>
-            </div>
+                  <div className="flex items-center justify-between pt-2">
+                    <a
+                      href="https://attachmentproject.com"
+                      className="flex items-center gap-1 text-sm text-primary hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                      attachmentproject.com
+                    </a>
+                    <Muted>Oct 15</Muted>
+                  </div>
+                </div>
 
-            {/* View more */}
-            <Button variant="outline" className="w-full">
-              View more
-            </Button>
+                {/* View more */}
+                <div className="pt-4">
+                  <Button variant="outline" className="w-full">
+                    View more
+                  </Button>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </main>
-
-      {/* CTA - Drawer on mobile, Dialog on desktop */}
-      {isMobile ? (
-        <Drawer open={ctaOpen} onOpenChange={setCtaOpen}>
-          <DrawerContent>
-            <DrawerHeader className="text-center">
-              <KiwiLogo className="mx-auto mb-2 h-8 w-auto" />
-              <DrawerTitle>Psykiwi</DrawerTitle>
-              <DrawerDescription>
-                Create your own personality profile
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button size="lg">Get Started</Button>
-              <Muted className="text-center">
-                Already have an account?{" "}
-                <a href="/login" className="text-primary hover:underline">
-                  Sign in
-                </a>
-              </Muted>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      ) : (
-        <Dialog open={ctaOpen} onOpenChange={setCtaOpen}>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader className="text-center">
-              <KiwiLogo className="mx-auto mb-2 h-8 w-auto" />
-              <DialogTitle>Psykiwi</DialogTitle>
-              <DialogDescription>
-                Create your own personality profile
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className="flex-col gap-2 sm:flex-col">
-              <Button size="lg" className="w-full">
-                Get Started
-              </Button>
-              <Muted className="text-center">
-                Already have an account?{" "}
-                <a href="/login" className="text-primary hover:underline">
-                  Sign in
-                </a>
-              </Muted>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      )}
     </div>
   );
 }
